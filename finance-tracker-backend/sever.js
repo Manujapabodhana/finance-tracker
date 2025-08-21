@@ -1,6 +1,7 @@
 const express = require('express');
 const mongoose = require('mongoose');
 const cors = require('cors');
+const path = require('path');
 require('dotenv').config();
 
 const app = express();
@@ -8,6 +9,9 @@ const app = express();
 // Middlewares
 app.use(express.json());
 app.use(cors());
+
+// Serve static files from public directory
+app.use(express.static(path.join(__dirname, 'public')));
 
 // MongoDB connection
 mongoose.connect(process.env.MONGODB_URI, {
@@ -27,6 +31,11 @@ const expenseRoutes = require('./routes/expenses');
 app.use('/api/users', userRoutes);
 app.use('/api/incomes', incomeRoutes);
 app.use('/api/expenses', expenseRoutes);
+
+// Serve frontend for any non-API routes
+app.get('*', (req, res) => {
+  res.sendFile(path.join(__dirname, 'public', 'index.html'));
+});
 
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => {

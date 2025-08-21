@@ -2,10 +2,10 @@
   "name": "finance-tracker-backend",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "sever.js",
   "scripts": {
-    "start": "node index.js",
-    "dev": "nodemon index.js",
+    "start": "node sever.js",
+    "dev": "nodemon sever.js",
     "test": "echo \"No tests yet\" && exit 0"
   },
   "keywords": [],
